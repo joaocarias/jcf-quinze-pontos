@@ -5,7 +5,9 @@ VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jcf.QuinzePontos.Api", "src\Jcf.QuinzePontos.Api\Jcf.QuinzePontos.Api.csproj", "{7473E2E8-2484-433E-9926-34CD75CC9E37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jcf.QuinzePontos.Identidade", "src\Jcf.QuinzePontos.Identidade\Jcf.QuinzePontos.Identidade.csproj", "{29D05DC5-C1FE-45F6-B199-77C73B3E2292}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jcf.QuinzePontos.Identidade", "src\Jcf.QuinzePontos.Identidade\Jcf.QuinzePontos.Identidade.csproj", "{29D05DC5-C1FE-45F6-B199-77C73B3E2292}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jcf.Client.LoteriaCaixa.Api", "src\Jcf.Client.LoteriaCaixa.Api\Jcf.Client.LoteriaCaixa.Api.csproj", "{AD689F8C-D1BB-4706-BD1F-8E49B3A7C6DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{29D05DC5-C1FE-45F6-B199-77C73B3E2292}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29D05DC5-C1FE-45F6-B199-77C73B3E2292}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29D05DC5-C1FE-45F6-B199-77C73B3E2292}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD689F8C-D1BB-4706-BD1F-8E49B3A7C6DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD689F8C-D1BB-4706-BD1F-8E49B3A7C6DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD689F8C-D1BB-4706-BD1F-8E49B3A7C6DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD689F8C-D1BB-4706-BD1F-8E49B3A7C6DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

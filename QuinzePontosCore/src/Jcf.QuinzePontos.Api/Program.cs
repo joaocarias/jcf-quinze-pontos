@@ -1,7 +1,10 @@
+using Jcf.Client.LoteriaCaixa.Api.LoteriaCaixaApi;
 using Jcf.QuinzePontos.Identidade;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Refit;
 using System.Text;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +33,13 @@ builder.Services.AddAuthentication( x =>
             ValidateAudience = false
         };
     });
+
+builder.Services.AddRefitClient<ILoteriasCaixaApi>()
+    .ConfigureHttpClient(c =>
+    {
+        c.BaseAddress = new Uri("https://loteriascaixa-api.herokuapp.com/api");
+    });
+
 
 var app = builder.Build();
 
