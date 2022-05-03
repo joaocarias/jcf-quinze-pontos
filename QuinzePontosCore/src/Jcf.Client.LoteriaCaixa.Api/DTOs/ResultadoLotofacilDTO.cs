@@ -1,6 +1,6 @@
 ﻿namespace Jcf.Client.LoteriaCaixa.Api.DTOs
 {
-    public class ResultadoLotofacil
+    public class ResultadoLotofacilDTO
     {
         public class Request
         {

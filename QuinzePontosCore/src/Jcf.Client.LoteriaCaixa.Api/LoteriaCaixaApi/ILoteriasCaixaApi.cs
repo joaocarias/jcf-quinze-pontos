@@ -6,6 +6,6 @@ namespace Jcf.Client.LoteriaCaixa.Api.LoteriaCaixaApi
     public interface ILoteriasCaixaApi
     {
         [Get("/lotofacil/{concurso}")]
-        Task<ResultadoLotofacil.Response> GetResultadoLotofacil(string concurso);
+        Task<ResultadoLotofacilDTO.Response> GetResultadoLotofacil(string concurso);
     }
 }
