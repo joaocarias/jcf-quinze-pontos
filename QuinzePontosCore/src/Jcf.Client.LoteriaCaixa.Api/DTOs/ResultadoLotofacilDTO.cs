@@ -14,7 +14,7 @@
             public int concurso { get; set; }
             public string data { get; set; }
             public string local { get; set; }
-            public List<string> dezenas { get; set; }
+            public string[] dezenas { get; set; }
             public List<Premiaco> premiacoes { get; set; }
             public List<EstadosPremiado> estadosPremiados { get; set; }
             public bool acumulou { get; set; }

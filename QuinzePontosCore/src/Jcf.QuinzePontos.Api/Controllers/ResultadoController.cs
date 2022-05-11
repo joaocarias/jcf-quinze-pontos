@@ -28,18 +28,23 @@ namespace Jcf.QuinzePontos.Api.Controllers
                 var ultimoResultado = new ResultadoLotofacilDTO.Response();
                 while(concurso > 0)
                 {
-                    var concursoSalvo = await _resultadoLotofacilRepositorio.ObtePorConcusroAsync(concurso);
-
-                    var resultado = await _loteriaCaixaApi.GetResultadoLotofacil(Convert.ToString(concurso));
-                    if(resultado != null)
+                    var salvo = await _resultadoLotofacilRepositorio.ObtePorConcusroAsync(concurso);
+                    if(salvo is null)
                     {
-                        ultimoResultado = resultado;
-                        concurso++;
-                    }
-                    else
-                    {
-                        concurso = -1;
-                    }
+                        var resultado = await _loteriaCaixaApi.GetResultadoLotofacil(Convert.ToString(concurso));
+                        if (resultado != null)
+                        {
+                            ultimoResultado = resultado;
+                            await _resultadoLotofacilRepositorio.AdicionarAsync(
+                                
+                                );
+                            concurso++;
+                        }
+                        else
+                        {
+                            concurso = -1;
+                        }
+                    }                    
                 }
 
                 return Ok(ultimoResultado);

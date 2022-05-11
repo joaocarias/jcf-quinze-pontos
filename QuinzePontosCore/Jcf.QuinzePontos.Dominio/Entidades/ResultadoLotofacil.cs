@@ -22,5 +22,17 @@ namespace Jcf.QuinzePontos.Dominio.Entidades
         public DateTime? DataProxConcurso { get; private set; }
 
         public int? ProxConcurso { get; private set; }
+
+        public ResultadoLotofacil(Concurso concurso, IList<Premiacao> premiacoes, IList<EstadoPremiado> estadosPremiados, bool? acumulou, string acumuladaProxConcurso, DateTime? dataProxConcurso, int? proxConcurso) : base()
+        {
+            ConcursoId = concurso?.Id ?? Guid.Empty;
+            Concurso = concurso;
+            Premiacoes = premiacoes;
+            EstadosPremiados = estadosPremiados;
+            Acumulou = acumulou;
+            AcumuladaProxConcurso = acumuladaProxConcurso;
+            DataProxConcurso = dataProxConcurso;
+            ProxConcurso = proxConcurso;
+        }
     }
 }

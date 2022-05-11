@@ -16,6 +16,13 @@ namespace Jcf.QuinzePontos.Dominio.Entidades
         [Required]
         public bool Ativo { get; private set; } = true;
 
+        public EntidadeBase()
+        {
+            Id = Guid.NewGuid();
+            DataCadastro = DateTime.Now;
+            Ativo = true;
+        }
+
         public void ApagarRegistro()
         {
             DataAlteracao = DateTime.Now;

@@ -56,6 +56,28 @@ namespace Jcf.QuinzePontos.Dominio.Entidades
         public int Dezena15 { get; private set; }
 
         [Required]
-        public decimal ValorAposta { get; private set; } 
+        public decimal ValorAposta { get; private set; }
+
+        public Concurso(int numero, DateTime? dataRealizacao, int dezena1, int dezena2, int dezena3, int dezena4, int dezena5, int dezena6, int dezena7, int dezena8, int dezena9, int dezena10, int dezena11, int dezena12, int dezena13, int dezena14, int dezena15, decimal valorAposta) : base()
+        {
+            Numero = numero;
+            DataRealizacao = dataRealizacao;
+            Dezena1 = dezena1;
+            Dezena2 = dezena2;
+            Dezena3 = dezena3;
+            Dezena4 = dezena4;
+            Dezena5 = dezena5;
+            Dezena6 = dezena6;
+            Dezena7 = dezena7;
+            Dezena8 = dezena8;
+            Dezena9 = dezena9;
+            Dezena10 = dezena10;
+            Dezena11 = dezena11;
+            Dezena12 = dezena12;
+            Dezena13 = dezena13;
+            Dezena14 = dezena14;
+            Dezena15 = dezena15;
+            ValorAposta = valorAposta;
+        }
     }
 }

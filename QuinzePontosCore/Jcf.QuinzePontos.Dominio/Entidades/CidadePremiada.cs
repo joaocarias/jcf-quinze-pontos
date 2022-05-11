@@ -16,5 +16,15 @@ namespace Jcf.QuinzePontos.Dominio.Entidades
         public double? Latitude { get; private set; }
         
         public double? Longitude { get; private set; }
+
+        public CidadePremiada(EstadoPremiado estadoPremiado, string nome, int? vencedores, double? latitude, double? longitude) : base()
+        {
+            EstadoPremiadoId = estadoPremiado?.Id ?? Guid.Empty; 
+            EstadoPremiado = estadoPremiado;
+            Nome = nome;
+            Vencedores = vencedores;
+            Latitude = latitude;
+            Longitude = longitude;
+        }
     }
 }
