@@ -15,8 +15,8 @@
             public string data { get; set; }
             public string local { get; set; }
             public string[] dezenas { get; set; }
-            public List<Premiaco> premiacoes { get; set; }
-            public List<EstadosPremiado> estadosPremiados { get; set; }
+            public List<Premiacao> premiacoes { get; set; }
+            public List<EstadoPremiado> estadosPremiados { get; set; }
             public bool acumulou { get; set; }
             public string acumuladaProxConcurso { get; set; }
             public string dataProxConcurso { get; set; }
@@ -25,21 +25,29 @@
             public int? mesSorte { get; set; }
         }
 
-        public class Premiaco
+        public class Premiacao
         {
             public string acertos { get; set; }
             public int vencedores { get; set; }
             public string premio { get; set; }
         }
 
-        public class EstadosPremiado
+        public class EstadoPremiado
         {
             public string nome { get; set; }
             public string uf { get; set; }
             public string vencedores { get; set; }
             public string latitude { get; set; }
             public string longitude { get; set; }
-            public List<object> cidades { get; set; }
+            public List<CidadePremiada> cidades { get; set; }
+        }
+
+        public class CidadePremiada
+        {
+            public string cidade { get; set; }
+            public string vencedores { get; set; }
+            public string latitude { get; set; }
+            public string longitude { get; set; }
         }
     }
 }

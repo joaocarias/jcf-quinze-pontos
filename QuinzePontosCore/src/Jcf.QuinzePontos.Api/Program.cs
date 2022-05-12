@@ -1,8 +1,10 @@
 using Jcf.Client.LoteriaCaixa.Api.LoteriaCaixaApi;
 using Jcf.QuinzePontos.Dominio.IRepositorios;
+using Jcf.QuinzePontos.Dominio.IServicos;
 using Jcf.QuinzePontos.Identidade;
 using Jcf.QuinzePontos.Infraestrutura.Contextos;
 using Jcf.QuinzePontos.Infraestrutura.Repositorio;
+using Jcf.QuinzePontos.Infraestrutura.Servicos;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -20,6 +22,9 @@ builder.Services.AddDbContext<AppDbContexto>(options =>
 
 // Repositorios
 builder.Services.AddScoped<IResultadoLotofacilRepositorio, ResultadoLotofacilRepositorio>();
+
+// Servicos
+builder.Services.AddScoped<IResultadoServico, ResultadoServico>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

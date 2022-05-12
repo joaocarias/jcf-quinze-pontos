@@ -16,13 +16,13 @@ namespace Jcf.QuinzePontos.Dominio.Entidades
         [ForeignKey(nameof(ResultadoLotofacilId))]
         public ResultadoLotofacil ResultadoLotofacil { get; private set; }
 
-        public Premiacao(EPremiacaoAcertos premiacaoAcerto, int vencedores, decimal premio, ResultadoLotofacil resultadoLotofacil)
+        public Premiacao(EPremiacaoAcertos premiacaoAcerto, int vencedores, decimal premio)
         {
             PremiacaoAcerto = premiacaoAcerto;
             Vencedores = vencedores;
-            Premio = premio;
-            ResultadoLotofacil = resultadoLotofacil;
-            ResultadoLotofacilId = resultadoLotofacil?.Id ?? Guid.Empty; 
+            Premio = premio; 
         }
+
+        private Premiacao() { }
     }
 }

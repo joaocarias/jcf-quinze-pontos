@@ -8,14 +8,11 @@ namespace Jcf.QuinzePontos.Infraestrutura.Servicos
 {
     public class ResultadoServico : IResultadoServico
     {
-        public Concurso? ConverterConcunsoLotocafil(ResultadoLotofacilDTO.Response resultado)
+        public Concurso ConverterConcunsoLotocafil(ResultadoLotofacilDTO.Response resultado)
         {
-            decimal valorAposta = new decimal(2);
-            DateTime? dataRealizacao = DateTime.Now;
-
-            var concurso = new Concurso(
+            Concurso concurso = new(
                     resultado.concurso,
-                    dataRealizacao,
+                    Convert.ToDateTime(resultado.data),
 
                     int.Parse(resultado.dezenas[0]),
                     int.Parse(resultado.dezenas[1]),
@@ -35,10 +32,31 @@ namespace Jcf.QuinzePontos.Infraestrutura.Servicos
                     int.Parse(resultado.dezenas[13]),
                     int.Parse(resultado.dezenas[14]),
 
-                    valorAposta
-                ) ;
+                    ObterValorAposta(resultado.premiacoes.FirstOrDefault(x => x.acertos.Equals(PremiacaoAcertos.ONZE_PONTOS)))
+                );
 
             return concurso;
+        }
+
+        public IList<EstadoPremiado> ConverterEstadoPremiadoLotofacil(ResultadoLotofacilDTO.Response resultado)
+        {
+            var estados = new List<EstadoPremiado>();
+
+            foreach(var estado in resultado.estadosPremiados)
+            {
+                estados.Add(
+                    new EstadoPremiado(
+                        estado.nome,
+                        estado.uf,
+                        int.Parse(estado.vencedores),
+                        estado.latitude,
+                        estado.longitude,
+                        ObterCidades(estado)
+                    )
+                );
+            }
+
+            return estados;
         }
 
         public IList<Premiacao> ConverterPremiacaoLotofacil(ResultadoLotofacilDTO.Response resultado)
@@ -49,33 +67,50 @@ namespace Jcf.QuinzePontos.Infraestrutura.Servicos
             {
                 premiacoes.Add(
                     new Premiacao(
-
+                        ObterEPremiacaoAcertos(premiacao.acertos),
+                        premiacao.vencedores,
+                        ConverterPremio(premiacao.premio)
                     )
+                );
             }
 
             return premiacoes;
         }
 
-        public ResultadoLotofacil? ConverterResultadoLotofacail(ResultadoLotofacilDTO.Response resultado)
+        private decimal ConverterPremio(string premio)
         {
-            if(resultado is not null)
+            try
             {
-                Concurso concurso = ConverterConcunsoLotocafil(resultado);
-                List<Premiacao> premiacoes = 
-
-                var retorno = new ResultadoLotofacil(
-                        concurso,
-
-                    );
-
-
-                return retorno;
+                var d = decimal.Parse(premio);
+                return d;
             }
+            catch (Exception ex)
+            {
+                return new decimal(0);
+            }
+        }
 
-            return null;            
-        }     
-        
-        private EPremiacaoAcertos ObterEPremiacaoAcertos (string pontos)
+        public ResultadoLotofacil ConverterResultadoLotofacail(ResultadoLotofacilDTO.Response resultado)
+        {
+            Concurso concurso = ConverterConcunsoLotocafil(resultado);
+            List<Premiacao> premiacoes = ConverterPremiacaoLotofacil(resultado).ToList();
+            List<EstadoPremiado> estadoPremiados = ConverterEstadoPremiadoLotofacil(resultado).ToList();
+            
+            var retorno = new ResultadoLotofacil(
+                    concurso,
+                    resultado.local,
+                    premiacoes,
+                    estadoPremiados,
+                    resultado.acumulou,
+                    resultado.acumuladaProxConcurso,
+                    !string.IsNullOrEmpty(resultado.dataProxConcurso) ? Convert.ToDateTime(resultado.dataProxConcurso) : null,
+                    resultado.proxConcurso
+                );
+
+            return retorno;
+        }
+
+        private EPremiacaoAcertos ObterEPremiacaoAcertos(string pontos)
         {
             EPremiacaoAcertos ePremiacaoAcertos = pontos switch
             {
@@ -86,6 +121,39 @@ namespace Jcf.QuinzePontos.Infraestrutura.Servicos
                 _ => EPremiacaoAcertos.OnzePontos,
             };
             return ePremiacaoAcertos;
+        }
+
+        private decimal ObterValorAposta(ResultadoLotofacilDTO.Premiacao onzePontos)
+        {
+            try
+            {
+                decimal.TryParse(onzePontos.premio, out decimal valorAposta);
+                var d = valorAposta / 2;
+                return d;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        private IList<CidadePremiada> ObterCidades(ResultadoLotofacilDTO.EstadoPremiado estadoPremiado)
+        {
+            var cidades = new List<CidadePremiada>();
+
+            foreach (var c in estadoPremiado.cidades)
+            {
+                cidades.Add(
+                    new CidadePremiada(
+                        c.cidade,
+                        int.Parse(c.vencedores),
+                        c.latitude,
+                        c.longitude
+                    )
+                 );
+            }
+
+            return cidades;
         }
     }
 }

@@ -2,7 +2,7 @@
 {
     public interface IRepositorioBase<T> where T : class
     {
-        Task<IList<T>>? ObteTodosAsync();
+        Task<IList<T>> ObteTodosAsync();
         Task<T>? ObterAsync(Guid id);
         Task<bool> AdicionarAsync(T entity);
         Task<bool> AtualizarAsync(T entity);

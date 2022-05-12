@@ -4,6 +4,6 @@ namespace Jcf.QuinzePontos.Dominio.IRepositorios
 {
     public interface IResultadoLotofacilRepositorio : IRepositorioBase<ResultadoLotofacil>
     {
-        Task<IList<ResultadoLotofacil>>? ObtePorConcusroAsync(int numeroConcurso);
+        Task<IList<ResultadoLotofacil>> ObtePorConcusroAsync(int numeroConcurso);
     }
 }

@@ -10,6 +10,8 @@ namespace Jcf.QuinzePontos.Dominio.Entidades
         [ForeignKey(nameof(ConcursoId))]
         public Concurso Concurso { get; private set; }
 
+        public string Local { get; private set; }
+
         public IList<Premiacao> Premiacoes { get; private set; }
 
         public IList<EstadoPremiado> EstadosPremiados { get; private set; }
@@ -23,10 +25,11 @@ namespace Jcf.QuinzePontos.Dominio.Entidades
 
         public int? ProxConcurso { get; private set; }
 
-        public ResultadoLotofacil(Concurso concurso, IList<Premiacao> premiacoes, IList<EstadoPremiado> estadosPremiados, bool? acumulou, string acumuladaProxConcurso, DateTime? dataProxConcurso, int? proxConcurso) : base()
+        public ResultadoLotofacil(Concurso concurso, string local, IList<Premiacao> premiacoes, IList<EstadoPremiado> estadosPremiados, bool? acumulou, string acumuladaProxConcurso, DateTime? dataProxConcurso, int? proxConcurso) : base()
         {
             ConcursoId = concurso?.Id ?? Guid.Empty;
             Concurso = concurso;
+            Local = local;
             Premiacoes = premiacoes;
             EstadosPremiados = estadosPremiados;
             Acumulou = acumulou;
@@ -34,5 +37,7 @@ namespace Jcf.QuinzePontos.Dominio.Entidades
             DataProxConcurso = dataProxConcurso;
             ProxConcurso = proxConcurso;
         }
+
+        private ResultadoLotofacil() { }
     }
 }

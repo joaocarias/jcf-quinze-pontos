@@ -79,5 +79,7 @@ namespace Jcf.QuinzePontos.Dominio.Entidades
             Dezena15 = dezena15;
             ValorAposta = valorAposta;
         }
+
+        private Concurso() { }
     }
 }

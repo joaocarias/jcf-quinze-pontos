@@ -18,7 +18,7 @@ namespace Jcf.QuinzePontos.Infraestrutura.Repositorio
         {
             try
             {
-                await _appDbContexto.ResultadosLotofacils.AddAsync(entity);
+                var t = await _appDbContexto.ResultadosLotofacils.AddAsync(entity);
                 await _appDbContexto.SaveChangesAsync();
                 return true;
             }
@@ -57,7 +57,7 @@ namespace Jcf.QuinzePontos.Infraestrutura.Repositorio
             }
         }
 
-        public async Task<IList<ResultadoLotofacil>>? ObtePorConcusroAsync(int numeroConcurso)
+        public async Task<IList<ResultadoLotofacil>> ObtePorConcusroAsync(int numeroConcurso)
         {
             try
             {
@@ -93,7 +93,7 @@ namespace Jcf.QuinzePontos.Infraestrutura.Repositorio
             }            
         }
 
-        public async Task<IList<ResultadoLotofacil>>? ObteTodosAsync()
+        public async Task<IList<ResultadoLotofacil>> ObteTodosAsync()
         {
             try
             {
