@@ -11,17 +11,17 @@ namespace Jcf.QuinzePontos.Dominio.Entidades
         public int? Vencedores { get; private set; }
 
         [StringLength(30)]
-        public string Latitude { get; private set; }
+        public string? Latitude { get; private set; }
 
         [StringLength(30)]
-        public string Longitude { get; private set; }
+        public string? Longitude { get; private set; }
 
         public Guid EstadoPremiadoId { get; private set; }
                
         [ForeignKey(nameof(EstadoPremiadoId))]
         public EstadoPremiado EstadoPremiado { get; private set; }
 
-        public CidadePremiada(string nome, int? vencedores, string latitude, string longitude) : base()
+        public CidadePremiada(string nome, int? vencedores, string? latitude, string? longitude) : base()
         {            
             Nome = nome;
             Vencedores = vencedores;

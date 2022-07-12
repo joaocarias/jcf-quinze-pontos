@@ -103,7 +103,7 @@ namespace Jcf.QuinzePontos.Infraestrutura.Servicos
                     estadoPremiados,
                     resultado.acumulou,
                     resultado.acumuladaProxConcurso,
-                    !string.IsNullOrEmpty(resultado.dataProxConcurso) ? Convert.ToDateTime(resultado.dataProxConcurso) : null,
+                    !string.IsNullOrEmpty(resultado.dataProxConcurso) ? ConvertToDateTime(resultado.dataProxConcurso) : null,
                     resultado.proxConcurso
                 );
 
@@ -155,5 +155,18 @@ namespace Jcf.QuinzePontos.Infraestrutura.Servicos
 
             return cidades;
         }
+
+        private DateTime? ConvertToDateTime(string data)
+        {
+            try
+            {
+                var d = Convert.ToDateTime(data);
+                return d;
+            }catch (Exception)
+            {
+                return null;
+            }
+        }
+
     }
 }

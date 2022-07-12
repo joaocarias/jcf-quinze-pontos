@@ -13,34 +13,48 @@ namespace Jcf.QuinzePontos.Api.Controllers
         private readonly ILoteriasCaixaApi _loteriaCaixaApi;
         private readonly IResultadoLotofacilRepositorio _resultadoLotofacilRepositorio;
         private readonly IResultadoServico _resultadoServico;
+        private readonly ITratamentoServico _tratamentoServico;
 
-        public ResultadoController(ILoteriasCaixaApi loteriaCaixaApi, IResultadoLotofacilRepositorio resultadoLotofacilRepositorio, IResultadoServico resultadoServico)
+        public ResultadoController(ILoteriasCaixaApi loteriaCaixaApi, IResultadoLotofacilRepositorio resultadoLotofacilRepositorio, IResultadoServico resultadoServico, ITratamentoServico tratamentoServico)
         {
             _loteriaCaixaApi = loteriaCaixaApi;
             _resultadoLotofacilRepositorio = resultadoLotofacilRepositorio;
             _resultadoServico = resultadoServico;
+            _tratamentoServico = tratamentoServico;
         }
 
         [HttpPut]
         [Route("atualizarbase")]
-        public async Task<IActionResult> AtualizarBaseDados() 
+        public async Task<IActionResult> AtualizarBaseDados(int concurso = 1) 
         {
-            var concurso = 1;
+            var consursosSalvos = await _resultadoLotofacilRepositorio.ObteTodosAsync();
+
             try
             {                
                 var ultimoResultado = new ResultadoLotofacilDTO.Response();
                 while(concurso > 0)
                 {
-                    var salvos = await _resultadoLotofacilRepositorio.ObtePorConcusroAsync(concurso);
-
-                    if(!salvos.Any())
+                    //var salvos = await _resultadoLotofacilRepositorio.ObtePorConcusroAsync(concurso);
+                    var salvo = consursosSalvos.Any(x => x.Concurso.Numero == concurso);
+                    if(!salvo)
                     {
                         var resultado = await ObterResultadoApiAsync(concurso);
                         if (resultado != null)
                         {
+                            //int[] dataProxConcursoProblema = { 2384, 2386, 2389, 2392, 2398 };
+
+                            //if(dataProxConcursoProblema.Contains(concurso))
+                            //{
+                            //    resultado.dataProxConcurso = _tratamentoServico.TratarDataString(concurso, resultado.dataProxConcurso);
+                            //}
+                            
                             var novo = _resultadoServico.ConverterResultadoLotofacail(resultado);
-                            var t = _resultadoLotofacilRepositorio.AdicionarAsync(novo);
-                            ultimoResultado = resultado; 
+                            string t = await _resultadoLotofacilRepositorio.AdicionarAsync(novo);
+                            ultimoResultado = resultado;
+                            if (!string.IsNullOrEmpty(t))
+                            {
+                                return BadRequest(ultimoResultado.concurso + " - " + t);
+                            }
                         }
                         else
                         {

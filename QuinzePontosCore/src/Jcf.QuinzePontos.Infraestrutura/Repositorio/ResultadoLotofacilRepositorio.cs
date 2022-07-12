@@ -14,17 +14,17 @@ namespace Jcf.QuinzePontos.Infraestrutura.Repositorio
             _appDbContexto = appDbContexto;
         }
 
-        public async Task<bool> AdicionarAsync(ResultadoLotofacil entity)
+        public async Task<string> AdicionarAsync(ResultadoLotofacil entity)
         {
             try
             {
                 var t = await _appDbContexto.ResultadosLotofacils.AddAsync(entity);
                 await _appDbContexto.SaveChangesAsync();
-                return true;
+                return string.Empty;
             }
             catch (Exception ex)
             {
-                return false;
+                return ex.Message;
             }
         }
 
@@ -80,7 +80,8 @@ namespace Jcf.QuinzePontos.Infraestrutura.Repositorio
             {
                 var retorno = await _appDbContexto.ResultadosLotofacils
                     .AsNoTracking()
-                    .FirstOrDefaultAsync(r => r.Id.Equals(id));                    
+                    .FirstOrDefaultAsync(r => r.Id.Equals(id));      
+                
                 if(retorno is not null)
                 {
                     return retorno;
@@ -98,6 +99,7 @@ namespace Jcf.QuinzePontos.Infraestrutura.Repositorio
             try
             {
                 var lista = await _appDbContexto.ResultadosLotofacils
+                    .Include(x => x.Concurso)
                     .Where(r => r.Ativo)
                     .AsNoTracking()
                     .ToListAsync();

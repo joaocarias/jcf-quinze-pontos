@@ -14,10 +14,10 @@ namespace Jcf.QuinzePontos.Dominio.Entidades
         public int? Vencedores { get; private set; }
 
         [StringLength(30)]
-        public string Latitude { get; private set; }
+        public string? Latitude { get; private set; }
 
         [StringLength(30)]
-        public string Longitude { get; private set; }
+        public string? Longitude { get; private set; }
 
         public IList<CidadePremiada> Cidades { get; private set; }
 
@@ -26,7 +26,7 @@ namespace Jcf.QuinzePontos.Dominio.Entidades
         [ForeignKey(nameof(ResultadoLotofacilId))]
         public ResultadoLotofacil ResultadoLotofacil { get; private set; }
 
-        public EstadoPremiado(string nome, string uf, int? vencedores, string latitude, string longitude, IList<CidadePremiada> cidades) : base()
+        public EstadoPremiado(string nome, string uf, int? vencedores, string? latitude, string? longitude, IList<CidadePremiada> cidades) : base()
         {
             Nome = nome;
             Uf = uf;

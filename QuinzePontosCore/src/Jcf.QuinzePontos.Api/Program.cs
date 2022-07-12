@@ -25,6 +25,7 @@ builder.Services.AddScoped<IResultadoLotofacilRepositorio, ResultadoLotofacilRep
 
 // Servicos
 builder.Services.AddScoped<IResultadoServico, ResultadoServico>();
+builder.Services.AddScoped<ITratamentoServico, TratamentoServico>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

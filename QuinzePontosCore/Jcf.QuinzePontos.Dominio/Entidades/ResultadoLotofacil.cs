@@ -39,5 +39,7 @@ namespace Jcf.QuinzePontos.Dominio.Entidades
         }
 
         private ResultadoLotofacil() { }
+
+        
     }
 }

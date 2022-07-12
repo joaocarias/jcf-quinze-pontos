@@ -37,8 +37,8 @@
             public string nome { get; set; }
             public string uf { get; set; }
             public string vencedores { get; set; }
-            public string latitude { get; set; }
-            public string longitude { get; set; }
+            public string? latitude { get; set; }
+            public string? longitude { get; set; }
             public List<CidadePremiada> cidades { get; set; }
         }
 
@@ -46,8 +46,8 @@
         {
             public string cidade { get; set; }
             public string vencedores { get; set; }
-            public string latitude { get; set; }
-            public string longitude { get; set; }
+            public string? latitude { get; set; }
+            public string? longitude { get; set; }
         }
     }
 }
